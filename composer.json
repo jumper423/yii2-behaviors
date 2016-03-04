@@ -1,6 +1,6 @@
 {
-  "name": "jumper423/yii2-helpers",
-  "description": "Helpers.",
+  "name": "jumper423/yii2-behaviors",
+  "description": "Behaviors.",
   "keywords": ["yii2", "behaviors"],
   "homepage": "https://github.com/jumper423/yii2-behaviors",
   "type": "project",
