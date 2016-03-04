@@ -1,0 +1,23 @@
+{
+  "name": "jumper423/yii2-helpers",
+  "description": "Helpers.",
+  "keywords": ["yii2", "behaviors"],
+  "homepage": "https://github.com/jumper423/yii2-behaviors",
+  "type": "project",
+  "license": "Apache License 2.0",
+  "support": {
+    "issues": "https://github.com/jumper423/yii2-behaviors/issues?state=open",
+    "source": "https://github.com/jumper423/yii2-behaviors"
+  },
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=5.4.0",
+    "yiisoft/yii2": "*"
+  },
+  "config": {
+    "process-timeout": 1800
+  },
+  "autoload": {
+    "psr-4": {"jumper423\\": ""}
+  }
+}
