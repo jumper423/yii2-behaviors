@@ -1,6 +1,6 @@
 <?php
 
-namespace jumper\behaviors;
+namespace jumper423\behaviors;
 
 use yii\behaviors\AttributeBehavior;
 use yii\helpers\Json;
