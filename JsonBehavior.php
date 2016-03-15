@@ -2,9 +2,28 @@
 
 namespace jumper423\behaviors;
 
-use yii\behaviors\AttributeBehavior;
 use yii\helpers\Json;
 
+/**
+ * Кодирование и декодирование значений в/из JSON формата
+ *
+ * [
+ *    'class' => JsonBehavior::className(),
+ *    'attributes' => [
+ *       self::EVENT_AFTER_VALIDATE => ['setting',],
+ *    ],
+ * ],
+ * [
+ *    'class' => JsonBehavior::className(),
+ *    'attributes' => [
+ *       self::EVENT_AFTER_FIND => ['setting',],
+ *    ],
+ *    'type' => JsonBehavior::DECODE,
+ * ],
+ *
+ * Class JsonBehavior
+ * @package jumper423\behaviors
+ */
 class JsonBehavior extends AttributeBehavior
 {
     const DECODE = 'decode';
@@ -12,33 +31,21 @@ class JsonBehavior extends AttributeBehavior
 
     public $type = self::ENCODE;
 
-    /**
-     * @inheritdoc
-     */
-    public function evaluateAttributes($event)
+    /** @inheritdoc */
+    protected function computation($value)
     {
-        if (!empty($this->attributes[$event->name])) {
-            $attributes = (array)$this->attributes[$event->name];
-            switch ($this->type) {
-                case self::ENCODE:
-                    foreach ($attributes as $attribute) {
-                        if (is_string($attribute)) {
-                            if (!is_string($this->owner->$attribute) && !is_null($this->owner->$attribute)) {
-                                $this->owner->$attribute = Json::encode($this->owner->$attribute);
-                            }
-                        }
-                    }
-                    break;
-                case self::DECODE:
-                    foreach ($attributes as $attribute) {
-                        if (is_array($attribute)) {
-                            if (!is_array($this->owner->$attribute) && !is_null($this->owner->$attribute)) {
-                                $this->owner->$attribute = Json::decode($this->owner->$attribute);
-                            }
-                        }
-                    }
-                    break;
-            }
+        switch ($this->type) {
+            case self::ENCODE:
+                if (!is_string($value) && !is_null($value)) {
+                    return Json::encode($value);
+                }
+                break;
+            case self::DECODE:
+                if (!is_array($value) && !is_null($value)) {
+                    return Json::decode($value);
+                }
+                break;
         }
+        return $value;
     }
 }
