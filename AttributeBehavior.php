@@ -15,10 +15,9 @@ class AttributeBehavior extends AttributeBehaviorBase
     {
         if (!empty($this->attributes[$event->name])) {
             $attributes = (array) $this->attributes[$event->name];
-            $value = $this->getValue($event);
             foreach ($attributes as $attribute) {
                 if (is_string($attribute)) {
-                    $this->owner->$attribute = $this->computation($value);
+                    $this->owner->$attribute = $this->computation($this->owner->$attribute);
                 }
             }
         }
